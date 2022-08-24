@@ -13,7 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { UsersModule } from './users/users.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     FormsModule,
+    ReactiveFormsModule,
     UsersModule,
     LayoutModule
   ],

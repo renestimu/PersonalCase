@@ -1,1 +1,66 @@
-<p>list-users works!</p>
+<div
+  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h2 class="h2">Users List</h2>
+  <a
+    routerLink="/add-user"
+    class="btn btn-success"
+    *ngIf="hideNoUser"
+  >
+    Add User
+  </a>
+</div>
+
+<div class="pricing-header mx-auto">
+  <div class="no-data text-center" *ngIf="preLoader">
+    <img src="assets/preloader.gif" class="preloader-icon" alt="No user" />
+  </div>
+
+  <div class="no-data text-center" *ngIf="noData">
+    <img src="assets/no-profile.png" class="nodata-msg" alt="No user" />
+    <p class="nodata-msg">No user added yet!</p>
+    <a routerLink="/add-user" class="btn btn-success"> Add User </a>
+  </div>
+
+  <div class="table-responsive" *ngIf="hideNoUser">
+    <table
+      class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg"
+    >
+      <thead>
+        <tr>
+
+          <th scope="col">User name</th>
+          <th scope="col">Email</th>
+          <th class="text-center" scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let user of users
+              | paginate: { itemsPerPage: 8, currentPage: p };
+            let i = index
+          "
+        >
+          <!-- <th scope="row">{{ user.$key }}</th> -->
+          <td>{{ user.firstName }} {{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td class="text-center action-block">
+            <span
+              class="mr-2 btn btn-outline-primary btn-sm"
+              routerLink="/edit-user/{{ user.$key }}"
+              >Edit</span
+            >
+            <span
+              class="btn btn-outline-danger btn-sm"
+              (click)="deleteUser( user)"
+              >Delete</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
